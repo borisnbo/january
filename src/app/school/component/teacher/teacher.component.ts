@@ -11,6 +11,7 @@ import { TeacherService } from '../../services/TeacherService';
 export class TeacherComponent implements OnInit {
 
   data:any =[];
+  completed:boolean = false;
   TForm: FormGroup;
   
   constructor(private tService: TeacherService,
@@ -18,7 +19,8 @@ export class TeacherComponent implements OnInit {
       public fb:FormBuilder) { 
     
     this.tService.getTeachers().subscribe(d=>{
-      this.data=d;         
+      this.data=d;  
+      this.completed = true;       
     });
     this.TForm = this.fb.group({
       surname: [''],
@@ -31,8 +33,13 @@ export class TeacherComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  saveAbn(){ 
-     console.log(this.TForm.value);
+  saveTeacher(){ 
+    return this.tService.saveTeachers(this.TForm.value).subscribe(d=>{
+     this.router.navigate(['home/teacher'])
+   });
+   
+    // console.log("Bonjour le monde");
+    
  }
 
 }
