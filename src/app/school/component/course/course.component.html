@@ -1,0 +1,69 @@
+         <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0">Dashboard v2</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard v2</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+     
+     
+     <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <div class="row">
+                                <div class="col-md-10">
+                                 <h6 class="m-0 font-weight-bold text-primary">List of Courses</h6>
+                                </div>
+                                <div class="col-md-2">
+                                    <a href="admin/patients/add" class="btn btn-success">New Course</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Name</th>
+                                            <th>Slug</th>
+                                            <th>Options</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>name</th>
+                                            <th>slug</th>
+                                            <th>Options</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody *ngFor="let patient of data ">
+                                        <tr>
+                                            <td>{{ patient.id }}</td>
+                                            <td>{{ patient.name }}</td>
+                                            <td>{{ patient.slug }}</td>
+                                            
+                                            <td>
+                                                <a href="#" class="btn btn-info ml-3">
+                                                {{ patient.id }}Show
+                                                </a>
+                                                <a href="#" class="btn btn-danger ml-3">
+                                                {{ patient.id }}Delete
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
