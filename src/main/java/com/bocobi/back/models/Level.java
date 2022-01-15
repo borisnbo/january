@@ -18,17 +18,7 @@ public class Level {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int id;
 	public String name;
-	
-	@OneToMany(cascade = CascadeType.ALL)
-	public List<Student> students;
-	
-	@OneToMany(cascade = CascadeType.ALL)
-	public List<Course> courses;
+	public String slug;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	public List<Teacher> teachers;
-	
-	@OneToMany(cascade = CascadeType.ALL)
-	public List<Classe> classes;
-	
+	public int amount;//montant de la scolarite
 }

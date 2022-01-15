@@ -2,27 +2,24 @@ package com.bocobi.back.models;
 
 import javax.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Classe {
+public class Teaching {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int id;
-	public String name;
-
 	@ManyToOne
-	public Level level;
-
+	public Teacher teacher;
 	@ManyToOne
-	public Serie serie;
+	public Classe classe;
+	@ManyToOne
+	public Course course;
 	
-	
+	public int coef;
 	
 }

@@ -12,37 +12,35 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bocobi.back.repos.courseRepos;
-import com.bocobi.back.models.Course;
+import com.bocobi.back.models.Level;
+import com.bocobi.back.repos.LevelRepos;
 
 @RestController
 @CrossOrigin
 @RequestMapping("/me")
-public class CourseController {
-	
+public class LevelController {
+
 	@Autowired
-	private courseRepos courseRepos;
-
-	@GetMapping("/course")
-	public List<Course> getCourse() {
-		return courseRepos.findAll();
+	private LevelRepos levelRepos;
+	
+	@GetMapping("/level")
+	public List<Level> getLevels() {
+		return levelRepos.findAll();
+	}	
+	
+	@PostMapping("/level")
+	public Level saveLevels(@RequestBody Level level) {
+		return levelRepos.save(level);
+	}	
+	
+	@GetMapping("/level/{id}")
+	public Level getLevel(@PathVariable int id) {
+		return levelRepos.findById(id).orElse(null);
 	}
 	
-	@PostMapping("/course")
-	public Course saveCourse(@RequestBody Course course) {
-		return courseRepos.save(course);
-	}
-
-
-	@GetMapping("/course/{id}")
-	public Course findCourseById(@PathVariable int course) {
-		return courseRepos.findById(course).orElse(null);
-	}
-	
-	@DeleteMapping("/course/{id}")
-	public String deleteCourse(@PathVariable int id) {
-		courseRepos.deleteById(id);
-		
-		return "Suprimer avec success"+id;
+	@DeleteMapping("/level/{id}")
+	public String deleteLevel(@PathVariable int id) {
+		levelRepos.deleteById(id);
+		return "Suprimer avec succes !";
 	}
 }

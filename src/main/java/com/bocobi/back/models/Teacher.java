@@ -1,5 +1,7 @@
 package com.bocobi.back.models;
 
+import java.time.LocalDate;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,13 +26,9 @@ public class Teacher {
 	public String name;
 	public String surname;
 	public String sexe;
-	public String dateOfBirth;
+	public LocalDate bithday;
 	public String grade;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	public java.util.List<Course> courses;
-	
-	@OneToMany(cascade = CascadeType.ALL)
-	public java.util.List<Classe> classes;
-	
+
+	//On lui mettra aussi une liste de matiere qu'il enseigne.
 }

@@ -10,19 +10,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Classe {
+public class Serie {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int id;
 	public String name;
-
-	@ManyToOne
-	public Level level;
-
-	@ManyToOne
-	public Serie serie;
-	
-	
+	public String slug;
 	
 }

@@ -12,36 +12,38 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bocobi.back.models.Teacher;
-import com.bocobi.back.repos.TeacherRepos;
+import com.bocobi.back.models.Classe;
+import com.bocobi.back.repos.ClasseRepos;
 
 @RestController
 @CrossOrigin
 @RequestMapping("/me")
-public class TeacherController {
-	
+public class ClasseController {
+
 	@Autowired
-	private TeacherRepos teacherRepos;
+	private ClasseRepos classeRepos;
 
-	@GetMapping("/teachers")
-	public List<Teacher> getTeacher() {
-		return teacherRepos.findAll();
-	}
-
-	@PostMapping("/teachers")
-	public Teacher saveTeacher(@RequestBody Teacher teacher) {
-		return teacherRepos.save(teacher);
-	}
-
-	@GetMapping("/teachers/{id}")
-	public Teacher findEmployeById(@PathVariable int teacher) {
-		return teacherRepos.findById(teacher).orElse(null);
+	@GetMapping("/classe")
+	public List<Classe> getClasse() {
+		return classeRepos.findAll();
 	}
 	
-	@DeleteMapping("/teachers/{id}")
-	public String deleteTeacher(@PathVariable int teacher) {
-		teacherRepos.deleteById(teacher);
-		return "Suprimer avec success"+teacher;
+	@PostMapping("/classe")
+	public Classe saveClasse(@RequestBody Classe classe) {
+		return classeRepos.save(classe);
+	}
+
+
+	@GetMapping("/classe/{id}")
+	public Classe findClasseById(@PathVariable int classe) {
+		return classeRepos.findById(classe).orElse(null);
+	}
+	
+	@DeleteMapping("/classe/{id}")
+	public String deleteClasse(@PathVariable int id) {
+		classeRepos.deleteById(id);
+		
+		return "Suprimer avec success"+id;
 	}
 	
 }

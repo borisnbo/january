@@ -12,37 +12,37 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bocobi.back.repos.courseRepos;
-import com.bocobi.back.models.Course;
+import com.bocobi.back.models.Serie;
+import com.bocobi.back.repos.SerieRepos;
 
 @RestController
 @CrossOrigin
 @RequestMapping("/me")
-public class CourseController {
-	
+public class SerieController {
+
+
 	@Autowired
-	private courseRepos courseRepos;
-
-	@GetMapping("/course")
-	public List<Course> getCourse() {
-		return courseRepos.findAll();
+	private SerieRepos serieRepos;
+	
+	@GetMapping("/serie")
+	public List<Serie> getSeries() {
+		return serieRepos.findAll();
+	}	
+	
+	@PostMapping("/serie")
+	public Serie saveSeries(@RequestBody Serie serie) {
+		return serieRepos.save(serie);
+	}	
+	
+	@GetMapping("/serie/{id}")
+	public Serie getSerie(@PathVariable int id) {
+		return serieRepos.findById(id).orElse(null);
 	}
 	
-	@PostMapping("/course")
-	public Course saveCourse(@RequestBody Course course) {
-		return courseRepos.save(course);
-	}
-
-
-	@GetMapping("/course/{id}")
-	public Course findCourseById(@PathVariable int course) {
-		return courseRepos.findById(course).orElse(null);
+	@DeleteMapping("/serie/{id}")
+	public String deleteSerie(@PathVariable int id) {
+		serieRepos.deleteById(id);
+		return "Suprimer avec succes !";
 	}
 	
-	@DeleteMapping("/course/{id}")
-	public String deleteCourse(@PathVariable int id) {
-		courseRepos.deleteById(id);
-		
-		return "Suprimer avec success"+id;
-	}
 }
