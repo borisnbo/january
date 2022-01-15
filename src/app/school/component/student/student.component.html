@@ -1,1 +1,16 @@
-<p>student works!</p>
+<div>
+
+    <table>
+        <thead>
+            <tr>
+                <th *ngFor="let h of header"> {{h.title}} </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let ctn of content">
+                <td *ngFor="let h of header">{{h.title}} </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

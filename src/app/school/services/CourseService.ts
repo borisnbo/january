@@ -9,7 +9,7 @@ import { Course } from '../models/Course';
 })
 export class CourseService {
 
-  endpoint: string = 'http://localhost:9898/course';
+  endpoint: string = 'http://localhost:9898/me/course';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
 
@@ -20,13 +20,19 @@ export class CourseService {
 
   //
 
-saveCourses(user:Course):Observable<Course>{
-    return this.http.post<Course>(this.endpoint, user, {headers: this.headers});
-  }  
-//
-getCourses():Observable<Course>{
-    return this.http.get<Course>(this.endpoint, {headers:this.headers});
-}
-
+  saveCourses(user:Course){
+      return this.http.post(this.endpoint, user, {headers: this.headers});
+    }  
+  //
+  getCourses(){
+      return this.http.get(this.endpoint, {headers:this.headers});
+  }
+  //
+  deleteCourses(course:number){
+    return this.http.delete(this.endpoint+"/"+ course)
+            .pipe(map((res:any)=>{
+              return res;
+            }));
+  }
 
 }

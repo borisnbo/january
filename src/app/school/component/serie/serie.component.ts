@@ -2,54 +2,57 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { LevelService } from '../../services/LevelService';
+import { SerieService } from '../../services/SerieService';
 
 @Component({
-  selector: 'app-level',
-  templateUrl: './level.component.html',
-  styleUrls: ['./level.component.css']
+  selector: 'app-serie',
+  templateUrl: './serie.component.html',
+  styleUrls: ['./serie.component.css']
 })
-export class LevelComponent implements OnInit {
+export class SerieComponent implements OnInit {
   data:any =[];
   completed:boolean = false;
   TForm: FormGroup;
   update:boolean =false;
-
   series:any =  [];
   dropdownList:any = [];
   selectedItems:any = [];
   dropdownSettings:IDropdownSettings = {};
 
-  constructor(private tService: LevelService,
+  constructor(private tService: SerieService,
     public router:Router,  
       public fb:FormBuilder) { 
         
-    this.getLevels();
+    this.getSeries();
     this.TForm = this.fb.group({
       name: [''],
-      slug: [''],
-      amount: ['']      
+      slug: ['']
     })
   }
 
   ngOnInit(): void {
-        
+    
+    this.series = [
+      { item_id: 1, item_text: 'Mumbai' },
+      { item_id: 2, item_text: 'Bangaluru' },
+      { item_id: 3, item_text: 'Pune' },
+      { item_id: 4, item_text: 'Navsari' },
+      { item_id: 5, item_text: 'New Delhi' }
+    ];
     this.dropdownSettings= {
-      singleSelection: true,
-      idField: 'id',
-      textField: 'name',
+      singleSelection: false,
+      idField: 'item_id',
+      textField: 'item_text',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
       itemsShowLimit: 3,
-      allowSearchFilter: true,
-      closeDropDownOnSelection: true
+      allowSearchFilter: true
     };
-
   }
 
   
-  getLevels(){
-    this.tService.getLevels().subscribe(d=>{
+  getSeries(){
+    this.tService.getSeries().subscribe(d=>{
       this.data=d; 
       this.completed = true;
     });
@@ -59,31 +62,30 @@ export class LevelComponent implements OnInit {
     this.update = true
     this.TForm.controls['name'].setValue(row.name)
     this.TForm.controls['slug'].setValue(row.name)
-    this.TForm.controls['amount'].setValue(row.amount)
   }
 
-  saveLevel(){ 
-    console.log(this.TForm.value.series);
+  saveSerie(){ 
+    console.log(this.TForm.value.name);
     
     if (this.TForm.value.name !="" && this.TForm.value.slug !="") {
-      this.tService.saveLevels(this.TForm.value).subscribe(d=>{ 
+      this.tService.saveSeries(this.TForm.value).subscribe(d=>{ 
         console.log(d);
         alert("Enregistré avec succès");
         this.TForm.reset();
-        this.getLevels();            
+        this.getSeries();            
         let ref = document.getElementById("close");
         ref?.click();  
     });
     }
   }
 
-  deleteLevel(row:number){ 
-      this.tService.deleteLevels(row).subscribe(d=>{       
+  deleteSerie(row:number){ 
+      this.tService.deleteSeries(row).subscribe(d=>{       
       alert("Erreur lors de la suppression");
     }, err=>{
       console.log(err);
       alert("Supprimé avec succès");
-      this.getLevels();
+      this.getSeries();
     });
   }
 

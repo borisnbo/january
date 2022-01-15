@@ -2,14 +2,14 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { Teacher } from '../models/Teacher';
+import { Level } from '../models/Level';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TeacherService {
+export class LevelService {
 
-  endpoint: string = 'http://localhost:9898/me/teachers';
+  endpoint: string = 'http://localhost:9898/me/level';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
 
@@ -19,18 +19,24 @@ export class TeacherService {
   ) { }
 
   //
-
-saveTeachers(user:Teacher):Observable<Teacher>{
-    return this.http.post<Teacher>(this.endpoint, user, {headers: this.headers});
+  getSeries() {
+    return this.http.get('http://localhost:9898/me/serie', {headers:this.headers});
+  }
+  
+saveLevels(level:Level){
+  return this.http.post(this.endpoint, level, {headers: this.headers});
   }  
 //
-getTeachers(){
+getLevels(){
   return this.http.get(this.endpoint, {headers:this.headers});
 }
 
 //
-deleteTeachers(user:number):Observable<Teacher>{
-  return this.http.delete<Teacher>(this.endpoint, {headers:this.headers});
+deleteLevels(level:number):Observable<Level>{   
+  return this.http.delete(this.endpoint+"/"+ level)
+          .pipe(map((res:any)=>{
+       return res;
+  }));
 }
 
 

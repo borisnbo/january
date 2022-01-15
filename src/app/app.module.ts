@@ -15,6 +15,9 @@ import { LevelComponent } from './school/component/level/level.component';
 import { HeaderComponent } from './school/common/header/header.component';
 import { FooterComponent } from './school/common/footer/footer.component';
 import { SidebarComponent } from './school/common/sidebar/sidebar.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { SerieComponent } from './school/component/serie/serie.component';
+import { InscriptionComponent } from './school/component/inscription/inscription.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,8 @@ import { SidebarComponent } from './school/common/sidebar/sidebar.component';
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
+    SerieComponent,
+    InscriptionComponent,
    
   ],
   imports: [
@@ -36,7 +41,8 @@ import { SidebarComponent } from './school/common/sidebar/sidebar.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    NgMultiSelectDropDownModule
 
   ],
   providers: [

@@ -3,12 +3,12 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Classes</h1>
+              <h1 class="m-0">Series</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Classes</li>
+                <li class="breadcrumb-item active">Series</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -24,10 +24,10 @@
               <div class="card">
                 <div class="card-header row">
                     <div class="col-10">                        
-                        <h3 class="card-title">List of all Classes stored in the database</h3>
+                        <h3 class="card-title">List of all Series stored in the database</h3>
                     </div>
                     <div class="col-2">
-                        <button class="btn btn-info"  type="button" data-toggle="modal" data-target="#staticBackdrop">Add Teacher</button>
+                        <button class="btn btn-info"  type="button" data-toggle="modal" data-target="#staticBackdrop">Add Serie</button>
                     </div>
                 </div>
                 <!-- /.card-header -->
@@ -36,9 +36,8 @@
                     <thead>
                     <tr>
                       <th>#</th>
-                      <th>Classe name</th>
-                      <th>Level</th>
-                      <th>Serie</th>
+                      <th>Serie Name</th>
+                      <th>Slug</th>
                       <th>Options</th>
                     </tr>
                     </thead>
@@ -46,20 +45,18 @@
                       <tr *ngFor="let t of data">
                         <td>{{t.id}}</td>
                         <td>{{t.name}}</td>
-                        <td>{{t.level.name}}</td>
-                        <td>{{t.serie.name}}</td>
+                        <td>{{t.slug}}</td>
                         <td>
                             <button class="btn btn-sm btn-warning" (click)="edit(t)"  data-toggle="modal" data-target="#staticBackdrop">edit</button>
-                            <button class="btn btn-sm btn-danger" (click)="deleteClasse(t.id)">delete</button>
+                            <button class="btn btn-sm btn-danger" (click)="deleteSerie(t.id)">delete</button>
                         </td>
                       </tr>                   
                     </tbody>
                     <tfoot>
                         <tr>
                           <th>#</th>
-                          <th>Classe name</th>
-                          <th>Level</th>
-                          <th>Serie</th>
+                          <th>Serie name</th>
+                          <th>Slug</th>
                           <th>Options</th>
                         </tr>
                     </tfoot>
@@ -82,33 +79,22 @@
  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg"> 
       <div class="modal-content">
-          <form action="#" [formGroup]="TForm" (ngSubmit)="saveClasse()">
+          <form action="#" [formGroup]="TForm" (ngSubmit)="saveSerie()">
             <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Add New Classe</h5>
+            <h5 class="modal-title" id="staticBackdropLabel">Add New Serie</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" required="" formControlName="name" placeholder="John Doe">
-                    <label for="name">Classe name:</label>
+                    <label for="name">Serie name:</label>
                 </div>
-                
-                           
-                <div class="form-group mb-3">
-                  <label for="name">Level name:</label>
-                  <select class="form-control" required="" formControlName="level">
-                    <option  *ngFor="let d of levels" value="{{d.id}}" (click)='selected($event)'> {{d.name}} </option>
-                  </select>
-                </div>
-                           
-                <div class="form-group mb-3">
-                  <label for="name">Serie name:</label>
-                  <select id="select" class="form-control" required="" formControlName="serie">
-                    <option  *ngFor="let s of series" value="{{s.id}}"> {{s.name}} </option>
-                  </select>
-                </div>
-              
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" required="" minlength="2" maxlength="6" formControlName="slug" placeholder="John Doe sammuel">
+                    <label for="slug">Abreviation ou description</label>
+                </div>  
+
             </div>
             <div class="modal-footer">
             <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -1,69 +1,107 @@
-         <!-- Content Header (Page header) -->
+    <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Dashboard v2</h1>
+              <h1 class="m-0">Courses</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard v2</li>
+                <li class="breadcrumb-item active">Courses</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->
       </div>
-     
-     
-     <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <div class="row">
-                                <div class="col-md-10">
-                                 <h6 class="m-0 font-weight-bold text-primary">List of Courses</h6>
-                                </div>
-                                <div class="col-md-2">
-                                    <a href="admin/patients/add" class="btn btn-success">New Course</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Name</th>
-                                            <th>Slug</th>
-                                            <th>Options</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>name</th>
-                                            <th>slug</th>
-                                            <th>Options</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody *ngFor="let patient of data ">
-                                        <tr>
-                                            <td>{{ patient.id }}</td>
-                                            <td>{{ patient.name }}</td>
-                                            <td>{{ patient.slug }}</td>
-                                            
-                                            <td>
-                                                <a href="#" class="btn btn-info ml-3">
-                                                {{ patient.id }}Show
-                                                </a>
-                                                <a href="#" class="btn btn-danger ml-3">
-                                                {{ patient.id }}Delete
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+
+              <div class="card">
+                <div class="card-header row">
+                    <div class="col-10">                        
+                        <h3 class="card-title">List of all Courses stored in the database</h3>
                     </div>
+                    <div class="col-2">
+                        <button class="btn btn-info"  type="button" data-toggle="modal" data-target="#staticBackdrop">Add Teacher</button>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Course name</th>
+                      <th>Slug</th>
+                      <th>Options</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let t of data">
+                        <td>{{t.id}}</td>
+                        <td>{{t.name}}</td>
+                        <td>{{t.slug}}</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning" (click)="edit(t)"  data-toggle="modal" data-target="#staticBackdrop">edit</button>
+                            <button class="btn btn-sm btn-danger" (click)="deleteCourse(t.id)">delete</button>
+                        </td>
+                      </tr>                   
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                          <th>#</th>
+                          <th>Course name</th>
+                          <th>Slug</th>
+                          <th>Options</th>
+                        </tr>
+                    </tfoot>
+                  </table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+
+
+ <!-- Modal -->
+ <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg"> 
+      <div class="modal-content">
+          <form action="#" [formGroup]="TForm" (ngSubmit)="saveCourse()">
+            <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Add New Course</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" required="" formControlName="name" placeholder="John Doe">
+                    <label for="name">Course name:</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" required="" minlength="2" maxlength="6" formControlName="slug" placeholder="John Doe sammuel">
+                    <label for="slug">Abreviation</label>
+                </div>  
+
+            </div>
+            <div class="modal-footer">
+            <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button *ngIf="update==false"  type="submit" class="btn btn-primary">Save</button>
+            <button *ngIf="update" type="submit" class="btn btn-primary">Update</button>
+          </div>
+          </form>
+      </div>
+    </div>
+  </div>

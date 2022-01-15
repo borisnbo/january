@@ -32,11 +32,11 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                  <table *ngIf="completed" id="example1" class="table table-bordered table-striped">
+                  <table id="example1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
                       <th>#</th>
-                      <th>Name & Surname</th>
+                      <th>Name</th>
                       <th>sexe</th>
                       <th>Date Of Bith</th>
                       <th>Grade</th>
@@ -44,24 +44,26 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let t of data">
-                      <td>{{t.id}}</td>
-                      <td>{{t.name}} {{t.surname}}</td>
-                      <td>{{t.sexe}}</td>
-                      <td>{{t.dateOfBirth}}</td>
-                      <td>{{t.grade}}</td>
-                      <td><button class="btn ">edit</button></td>
-                    </tr>
-                   
+                      <tr *ngFor="let t of data">
+                        <td>{{t.id}}</td>
+                        <td>{{t.name+" "+t.surname}}</td>
+                        <td>{{t.sexe}}</td>
+                        <td>{{t.dateOfBirth}}</td>
+                        <td>{{t.grade}}</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning" (click)="edit(t)"  data-toggle="modal" data-target="#modal-lg">edit</button>
+                            <button class="btn btn-sm btn-danger" (click)="deleteTeacher(t.id)">delete</button>
+                        </td>
+                      </tr>                   
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>#</th>
-                            <th>Name & Surname</th>
-                            <th>sexe</th>
-                            <th>Date Of Bith</th>
-                            <th>Grade</th>
-                            <th>Options</th>
+                          <th>#</th>
+                          <th>Name & Surname</th>
+                          <th>sexe</th>
+                          <th>Bith</th>
+                          <th>Grade</th>
+                          <th>Options</th>
                         </tr>
                     </tfoot>
                   </table>
@@ -93,31 +95,34 @@
             <div class="modal-body">
               
                     <div class="card-body">
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Name</label>
-                        <input type="text" formControlName="name" class="form-control" id="exampleInputEmail1" placeholder="Klark">
+                      <div class="form-floating mb-3">
+                        <input type="text" formControlName="name" class="form-control" placeholder="Klark">
+                        <label for="nam">Name</label>
                       </div>
-                      <div class="form-group">
+                      <div class="form-floating mb-3">
+                        <input type="text" formControlName="surname" class="form-control" placeholder="John Doe">
                         <label for="exampleInputPassword1">surname</label>
-                        <input type="text" formControlName="surname" class="form-control" id="exampleInputPassword1" placeholder="John Doe">
+                      </div>
+                      <div class="form-floating mb-3">
+                        <input type="date" formControlName="dateOfBirth" class="form-control" placeholder="John Doe">
+                        <label for="dateOfBirth">BithDay</label>
+                      </div>
+                      <div class="form-floating mb-3">
+                        <input type="text" formControlName="grade" class="form-control" placeholder="John Doe">
+                        <label for="grade">Grade</label>
                       </div>
                       <div class="form-group">
-                        <label for="exampleInputPassword1">Sexe</label>
-                        <input type="text" formControlName="sexe" class="form-control" id="exampleInputPassword1" placeholder="John Doe">
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInputPassword1">BithDay</label>
-                        <input type="date" formControlName="dateOfBirth" class="form-control" id="exampleInputPassword1" placeholder="John Doe">
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInputPassword1">Grade</label>
-                        <input type="text" formControlName="grade" class="form-control" id="exampleInputPassword1" placeholder="John Doe">
+                        <label>Sexe</label>
+                        <select class="form-control select2bs4" formControlName="sexe" style="width: 100%;">
+                          <option value="Masculin">Masculin</option>
+                          <option value="Feminin">Feminin</option>
+                        </select>
                       </div>
                     </div>
                     <!-- /.card-body -->
             </div>
             <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button"  class="btn btn-default" data-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-primary">Save changes</button>
             </div>
                   </form>
@@ -126,3 +131,4 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
+

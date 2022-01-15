@@ -1,1 +1,113 @@
-<p>level works!</p>
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0">Levels</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Levels</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+
+              <div class="card">
+                <div class="card-header row">
+                    <div class="col-10">                        
+                        <h3 class="card-title">List of all Levels stored in the database</h3>
+                    </div>
+                    <div class="col-2">
+                        <button class="btn btn-info"  type="button" data-toggle="modal" data-target="#staticBackdrop">Add Level</button>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Level Name</th>
+                      <th>Slug</th>
+                      <th>Amount</th>
+                      <th>Options</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let t of data">
+                        <td>{{t.id}}</td>
+                        <td>{{t.name}}</td>
+                        <td>{{t.slug}}</td>
+                        <td>{{t.amount}}</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning" (click)="edit(t)"  data-toggle="modal" data-target="#staticBackdrop">edit</button>
+                            <button class="btn btn-sm btn-danger" (click)="deleteLevel(t.id)">delete</button>
+                        </td>
+                      </tr>                   
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                          <th>#</th>
+                          <th>Level name</th>
+                          <th>Slug</th>
+                          <th>Amount</th>
+                          <th>Options</th>
+                        </tr>
+                    </tfoot>
+                  </table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+
+
+ <!-- Modal -->
+ <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg"> 
+      <div class="modal-content">
+          <form action="#" [formGroup]="TForm" (ngSubmit)="saveLevel()">
+            <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Add New Level</h5>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" required="" formControlName="name" placeholder="John Doe">
+                    <label for="name">Level name:</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" required="" minlength="2" maxlength="6" formControlName="slug" placeholder="John Doe sammuel">
+                    <label for="slug">Abreviation ou description</label>
+                </div>  
+                <div class="form-floating mb-3">
+                  <input type="number" class="form-control" required="" formControlName="amount">
+                  <label for="amount">Montant de la scolarite</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button *ngIf="update==false"  type="submit" class="btn btn-primary">Save</button>
+            <button *ngIf="update" type="submit" class="btn btn-primary">Update</button>
+          </div>
+          </form>
+      </div>
+    </div>
+  </div>
